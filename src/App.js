@@ -1,58 +1,104 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Switch
 } from 'react-router-dom';
 import Types from './pages/Types'
 import Items from './pages/Items'
-import About from './pages/About'
+import Home from './pages/Home'
+import Toolbar from "./components/Toolbar"
+import NotFound from "./pages/NotFound"
 
-class App extends Component {
+export default class App extends Component {
   constructor(props){
-    super(props)
+    super(props);
     this.state={
-      arrayType:[],
-      arrayItem:[]
-    }
+     dataTypes: [
+        {
+            "id":1,
+            "type":"A"
+            
+        },
+        {
+            "id":2,
+            "type":"B"
+            
+        }
+    ],
+  dataItems:[]
+}
+
+}
+
+  onSave = (id, valueType) => {
+    let dataType = this.state.dataTypes.map(x => {
+      if (x.id === id) {
+        x.type = valueType;
+      }
+      return x;
+    })
+    this.setState({ dataType });
   }
-  
+
+  onDelete = id => {
+
+  }
+
+  onAddType=type=>{
+    let dataType={
+      id:Date.now(),
+      type:type
+    };
+    let dataTypes = [...this.state.dataTypes, dataType];
+    this.setState({dataTypes})
+  }
+
+  onAddItem=(item,type)=>{
+let dataItem ={
+  id: Date.now(),
+  item:item,
+  type:type 
+};
+let dataItems = [...this.state.dataItems, dataItem];
+this.setState({dataItems})
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Hello !!!</h1>
-        </header>
-
-        <Router>
-
+      <Router>
+        <div className="App">
+          <Toolbar />
           <div>
-            <div className="row">
-              <div class="col-md-6 col-md-offset-3">
-                <div class="btn-group" role="group" aria-label="...">
-                  <Link to="/" class="btn btn-default">Types</Link>
-                  <Link to="/Items" class="btn btn-default">Items</Link>
-                  <Link to="/about" class="btn btn-default">About</Link>
-                </div>
-              </div>
-            </div>
-            <Route exact path={`/`} render={() => (
-              <Types />
-            )} />
-            <Route exact path={`/Items`} render={() => (
-              <Items />
-            )} />
-            <Route exact path={`/about`} render={() => (
-              <About />
-            )} />
+            <Switch>
+              <Route exact path={`/`} render={() => (
+                <Home />
+              )} />
+              <Route path={`/Types`} render={props => (
+                <Types 
+                typeData={this.state.dataTypes} 
+                sType={this.onSave}
+                tDelet={this.onDelete}
+                onAdd={this.onAddType}
+                {...props}/>
+              )} />
+              <Route path={`/Items`} render={props => (
+                <Items 
+                typeData={this.state.dataTypes}
+                itemsData={this.state.dataItems}
+                onAddi={this.onAddItem}
+                {...props}/>
+              )} />
+              <Route render={() => (
+                <NotFound />
+              )} />
+            </Switch>
           </div>
-        </Router>
-      </div>
+        </div>
+      </Router>
     );
   }
 }
 
-export default App;
+
