@@ -20,9 +20,9 @@ this.state={
   addItem=event=>{ //добавляем item
     event.preventDefault();
     let item = this.state.item;
-    let type = this.state.value;
+    let typeId = this.state.value;
     if(item){
-      this.props.onAddi(item,type);
+      this.props.onAddi(item,typeId);
       this.setState({item:''})
     }
   }
@@ -55,7 +55,7 @@ this.state={
 
               {this.props.itemsData.map(item=>
               (<ListItem resultItem={item} key={item.id}
-                resultType={this.props.typeData.find(x=>x.id==item.type)}/>))}
+                resultType={this.props.typeData.find(x=>x.id===item.typeId)}/>))}
 
             </ul> 
           </div>

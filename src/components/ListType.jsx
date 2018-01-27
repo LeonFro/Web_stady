@@ -5,7 +5,8 @@ export default class ListType extends Component {
         super(props);
         this.state = {
             isEdit: false,
-            type: props.typeData.type
+            type: props.typeData.type,
+            id: props.typeData.id
         }
     }
 
@@ -16,8 +17,9 @@ export default class ListType extends Component {
     }
 
     // formChange = () => {
-    //     let value =this.props.typeData.type
-    //  this.setState({value})
+    //     return false;
+    //     //       let value =this.props.typeData.type
+    //     //    this.setState({value})
     // }
 
 
@@ -30,13 +32,23 @@ export default class ListType extends Component {
     renderOnEdit() {
         return (
             <li className="list-group-item list-group-item-warning">
-                <form className="form-inline" onChange={this.formChange}>
+                <form className="form-inline" onSubmit={(e)=>
+                    {
+                        e.preventDefault();
+                        return false;
+                    }
+                    }>
 
                     <input type="text" className="form-control"
                         placeholder="Add type" ref="type"
                         defaultValue={this.props.typeData.type} />
 
-                    <button className="btn btn-danger pull-right" onClick={() => this.deletForm(this.props.id)}>Delete</button>
+                    <button className="btn btn-danger pull-right" onClick={
+                        () => {
+                            
+                            this.props.deletForm(this.state.id)
+                        }
+                    }>Delete</button>
                     <button className="btn btn-success pull-right" onClick={() => this.setState({ isEdit: false })}>Cancel</button>
                     <button className="btn btn-warning pull-right" onClick={this.saveForm}>Save</button>
 
@@ -44,7 +56,7 @@ export default class ListType extends Component {
             </li>
         )
     }
-    
+
     rendrerOffEdit() {
         return (
             <li className="list-group-item list-group-item-warning">
