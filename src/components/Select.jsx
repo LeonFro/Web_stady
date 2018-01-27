@@ -5,8 +5,9 @@ export default class Select extends Component{
         super(props)
     }
     render(){
+        const {typeData} = this.props
     return(
-        <option value={this.props.typeData.id}>{this.props.typeData.type}</option>
+        <option value={typeData.id}>{typeData.type}</option>
     )
 }
 }

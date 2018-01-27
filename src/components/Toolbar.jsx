@@ -12,9 +12,9 @@ function Toolbar() {
 
                     <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul className="nav navbar-nav">
-                            <li> <NavLink exact to="/" activeStyle={{color:"red"}}>Home</NavLink></li>
+                            <li> <NavLink exact to="/" activeStyle={{color:"green"}}>Home</NavLink></li>
                             <li><NavLink to="/Types" activeStyle={{color:"red"}}>Types</NavLink></li>
-                            <li><NavLink to="/Items" activeStyle={{color:"red"}}>Items</NavLink></li>
+                            <li><NavLink to="/Items" activeStyle={{color:"orange"}}>Items</NavLink></li>
                             {/* { user ? <li><a to="">Enter</a></li> 
        :
         <li><a to="">Exit</a></li>} */}

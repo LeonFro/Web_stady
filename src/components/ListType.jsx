@@ -44,6 +44,7 @@ export default class ListType extends Component {
             </li>
         )
     }
+    
     rendrerOffEdit() {
         return (
             <li className="list-group-item list-group-item-warning">
