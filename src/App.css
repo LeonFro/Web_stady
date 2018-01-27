@@ -21,7 +21,18 @@
 .App-intro {
   font-size: large;
 }
-
+.btn-default{
+  margin: 20px;
+}
+.cool{
+  margin: 20px;
+}
+.cooli{
+  margin: 20px;
+}
+.btn{
+  margin: 3px;
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
